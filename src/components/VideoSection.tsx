@@ -1,59 +1,85 @@
 
+import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Play, Clock, User } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface VideoSectionProps {
   selectedTopic: string;
   selectedDifficulty: string;
 }
 
-const videoData = {
-  strings: {
-    beginner: [
-      { id: 1, title: "String Basics - Introduction", duration: "15:30", instructor: "freeCodeCamp", thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop", url: "https://www.youtube.com/watch?v=example1" },
-      { id: 2, title: "String Operations and Methods", duration: "22:45", instructor: "Coursera", thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&h=200&fit=crop", url: "https://www.youtube.com/watch?v=example2" }
-    ],
-    medium: [
-      { id: 3, title: "String Algorithms - Pattern Matching", duration: "28:15", instructor: "YouTube Tutorial", thumbnail: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=300&h=200&fit=crop", url: "https://www.youtube.com/watch?v=example3" }
-    ]
-  },
-  sorting: {
-    beginner: [
-      { id: 4, title: "Bubble Sort Explained", duration: "12:20", instructor: "freeCodeCamp", thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop", url: "https://www.youtube.com/watch?v=example4" },
-      { id: 5, title: "Selection Sort Algorithm", duration: "18:10", instructor: "Coursera", thumbnail: "https://images.unsplash.com/photo-1518932945647-7a1c969f8be2?w=300&h=200&fit=crop", url: "https://www.youtube.com/watch?v=example5" }
-    ]
-  }
-};
+interface Video {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  topic: string;
+  difficulty: string;
+  platform: string;
+  duration_minutes: number;
+}
 
 export const VideoSection = ({ selectedTopic, selectedDifficulty }: VideoSectionProps) => {
-  const getVideos = () => {
-    if (selectedTopic === 'all') {
-      const allVideos = [];
-      Object.values(videoData).forEach(topicVideos => {
-        Object.values(topicVideos).forEach(difficultyVideos => {
-          allVideos.push(...difficultyVideos);
-        });
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchVideos();
+  }, [selectedTopic, selectedDifficulty]);
+
+  const fetchVideos = async () => {
+    try {
+      setLoading(true);
+      let query = supabase.from('videos').select('*');
+
+      if (selectedTopic !== 'all') {
+        query = query.eq('topic', selectedTopic);
+      }
+
+      if (selectedDifficulty !== 'all') {
+        query = query.eq('difficulty', selectedDifficulty);
+      }
+
+      const { data, error } = await query.order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      setVideos(data || []);
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load videos. Please try again.",
+        variant: "destructive",
       });
-      return allVideos;
+    } finally {
+      setLoading(false);
     }
-
-    const topicVideos = videoData[selectedTopic as keyof typeof videoData];
-    if (!topicVideos) return [];
-
-    if (selectedDifficulty === 'all') {
-      const allDifficultyVideos = [];
-      Object.values(topicVideos).forEach(videos => {
-        allDifficultyVideos.push(...videos);
-      });
-      return allDifficultyVideos;
-    }
-
-    return topicVideos[selectedDifficulty as keyof typeof topicVideos] || [];
   };
 
-  const videos = getVideos();
+  if (loading) {
+    return (
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <Card key={index} className="overflow-hidden bg-white/80 backdrop-blur-sm border-0">
+            <div className="w-full h-48 bg-slate-200 animate-pulse" />
+            <div className="p-4 space-y-3">
+              <div className="h-4 bg-slate-200 rounded animate-pulse" />
+              <div className="h-3 bg-slate-200 rounded animate-pulse w-3/4" />
+              <div className="h-8 bg-slate-200 rounded animate-pulse" />
+            </div>
+          </Card>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -62,7 +88,7 @@ export const VideoSection = ({ selectedTopic, selectedDifficulty }: VideoSection
           <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white/80 backdrop-blur-sm border-0">
             <div className="relative">
               <img 
-                src={video.thumbnail} 
+                src={`https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop&seed=${video.id}`}
                 alt={video.title}
                 className="w-full h-48 object-cover"
               />
@@ -75,16 +101,17 @@ export const VideoSection = ({ selectedTopic, selectedDifficulty }: VideoSection
               <div className="absolute top-2 right-2">
                 <Badge className="bg-black/70 text-white">
                   <Clock className="h-3 w-3 mr-1" />
-                  {video.duration}
+                  {video.duration_minutes}m
                 </Badge>
               </div>
             </div>
             
             <div className="p-4">
               <h3 className="font-semibold text-slate-800 mb-2 line-clamp-2">{video.title}</h3>
+              <p className="text-sm text-slate-600 mb-3 line-clamp-2">{video.description}</p>
               <div className="flex items-center text-sm text-slate-600 mb-3">
                 <User className="h-4 w-4 mr-1" />
-                {video.instructor}
+                {video.platform}
               </div>
               <Button 
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
@@ -97,7 +124,7 @@ export const VideoSection = ({ selectedTopic, selectedDifficulty }: VideoSection
         ))}
       </div>
       
-      {videos.length === 0 && (
+      {videos.length === 0 && !loading && (
         <div className="text-center py-12">
           <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
             <Play className="h-12 w-12 text-blue-500" />

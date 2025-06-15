@@ -14,7 +14,7 @@ interface SidebarProps {
 const topics = [
   { id: 'strings', name: 'Strings', icon: '📝' },
   { id: 'basics', name: 'Basics', icon: '🔤' },
-  { id: 'bitmanipulation', name: 'Bit Manipulation', icon: '⚡' },
+  { id: 'bit-manipulation', name: 'Bit Manipulation', icon: '⚡' },
   { id: 'sorting', name: 'Sorting', icon: '🔄' },
   { id: 'searching', name: 'Searching', icon: '🔍' },
   { id: 'hashmaps', name: 'Hashmaps', icon: '🗺️' },
@@ -23,7 +23,7 @@ const topics = [
 const difficulties = [
   { id: 'beginner', name: 'Beginner', color: 'bg-green-100 text-green-800' },
   { id: 'medium', name: 'Medium', color: 'bg-yellow-100 text-yellow-800' },
-  { id: 'advanced', name: 'Advanced', color: 'bg-red-100 text-red-800' },
+  { id: 'high', name: 'High', color: 'bg-red-100 text-red-800' },
 ];
 
 export const Sidebar = ({ selectedTopic, setSelectedTopic, selectedDifficulty, setSelectedDifficulty }: SidebarProps) => {

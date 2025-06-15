@@ -9,7 +9,174 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      coding_problems: {
+        Row: {
+          created_at: string
+          description: string | null
+          difficulty: string
+          id: string
+          platform: string
+          problem_url: string
+          tags: string[] | null
+          title: string
+          topic: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          difficulty: string
+          id?: string
+          platform: string
+          problem_url: string
+          tags?: string[] | null
+          title: string
+          topic: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          difficulty?: string
+          id?: string
+          platform?: string
+          problem_url?: string
+          tags?: string[] | null
+          title?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      mcqs: {
+        Row: {
+          correct_answer: string
+          created_at: string
+          difficulty: string
+          explanation: string | null
+          id: string
+          option_a: string
+          option_b: string
+          option_c: string
+          option_d: string
+          question: string
+          topic: string
+        }
+        Insert: {
+          correct_answer: string
+          created_at?: string
+          difficulty: string
+          explanation?: string | null
+          id?: string
+          option_a: string
+          option_b: string
+          option_c: string
+          option_d: string
+          question: string
+          topic: string
+        }
+        Update: {
+          correct_answer?: string
+          created_at?: string
+          difficulty?: string
+          explanation?: string | null
+          id?: string
+          option_a?: string
+          option_b?: string
+          option_c?: string
+          option_d?: string
+          question?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          completed: boolean
+          completed_at: string | null
+          content_id: string
+          content_type: string
+          created_at: string
+          id: string
+          score: number | null
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          completed_at?: string | null
+          content_id: string
+          content_type: string
+          created_at?: string
+          id?: string
+          score?: number | null
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          completed_at?: string | null
+          content_id?: string
+          content_type?: string
+          created_at?: string
+          id?: string
+          score?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      videos: {
+        Row: {
+          created_at: string
+          description: string | null
+          difficulty: string
+          duration_minutes: number | null
+          id: string
+          platform: string
+          title: string
+          topic: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          difficulty: string
+          duration_minutes?: number | null
+          id?: string
+          platform: string
+          title: string
+          topic: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          difficulty?: string
+          duration_minutes?: number | null
+          id?: string
+          platform?: string
+          title?: string
+          topic?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
