@@ -13,7 +13,8 @@ export const ExperienceSection = () => {
         "Web Programming with Python and JavaScript"
       ],
       type: "Educational Program",
-      color: "from-red-600 to-red-700"
+      color: "from-red-600 to-red-700",
+      profileImage: "https://camo.githubusercontent.com/2485cdb92cc1563cb21703bd1dc5474a727cd17b4d8243b27b9906468ec4e945/68747470733a2f2f676f6f2e676c2f6d4a774e5543"
     },
     {
       organization: "TCS iON Career Edge",
@@ -38,7 +39,8 @@ export const ExperienceSection = () => {
         "Risk Management"
       ],
       type: "Virtual Experience",
-      color: "from-purple-600 to-purple-700"
+      color: "from-purple-600 to-purple-700",
+      profileImage: "https://bookface-images.s3.amazonaws.com/logos/06f37a2c3431748d0ddb96f49cb39db93035c618.png?1701733673"
     },
     {
       organization: "ServiceNow",
@@ -49,7 +51,8 @@ export const ExperienceSection = () => {
         "UI Builder – Apr 2025"
       ],
       type: "Technical Certification",
-      color: "from-green-600 to-green-700"
+      color: "from-green-600 to-green-700",
+      profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi9azji1P3eHGE-4K5f_uogVJk8glXpar_cg&s"
     }
   ];
 
@@ -68,8 +71,16 @@ export const ExperienceSection = () => {
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${cert.color} flex items-center justify-center`}>
-                          <Award className="h-6 w-6 text-white" />
+                        <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${cert.color} flex items-center justify-center overflow-hidden`}>
+                          {cert.profileImage ? (
+                            <img 
+                              src={cert.profileImage} 
+                              alt={`${cert.organization} logo`}
+                              className="w-full h-full object-contain p-1"
+                            />
+                          ) : (
+                            <Award className="h-6 w-6 text-white" />
+                          )}
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold text-gray-800">{cert.organization}</h3>
