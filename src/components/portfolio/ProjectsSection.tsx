@@ -7,7 +7,7 @@ export const ProjectsSection = () => {
     {
       title: "Deep Detect",
       description: "Real-time threat detection and defense system using advanced cybersecurity techniques and machine learning algorithms.",
-      skills: ["Cybersecurity", "Machine Learning", "Python", "Threat Detection", "Real-time Processing"],
+      skills: ["Cybersecurity", "Machine Learning", "Python", "Threat Detection"],
       github: "https://github.com/Hemanth-Kumar-Somana/Deep_Detect/",
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&h=300&fit=crop", // Cybersecurity/network image
       gradient: "from-red-500 to-pink-500"
@@ -15,7 +15,7 @@ export const ProjectsSection = () => {
     {
       title: "Password Manager",
       description: "Secure Vault for Your Credentials with advanced encryption and user-friendly interface for managing passwords safely.",
-      skills: ["Security", "Encryption", "React", "Node.js", "Database Security"],
+      skills: ["MERN Stack", "Security", "Encryption"],
       github: "https://github.com/Hemanth-Kumar-Somana/Password-Manager",
       image: "https://images.unsplash.com/photo-1633265486064-086b219458ec?w=500&h=300&fit=crop", // Security/lock image
       gradient: "from-blue-500 to-cyan-500"
@@ -23,7 +23,7 @@ export const ProjectsSection = () => {
     {
       title: "DSA Learning Portal",
       description: "DSA Made Simple and Effective - A comprehensive platform for learning Data Structures and Algorithms with interactive content.",
-      skills: ["MERN Stack", "React", "Node.js", "MongoDB", "Educational Technology"],
+      skills: ["React", "Node.js", "Educational Technology"],
       github: "https://github.com/Hemanth-Kumar-Somana/DSA-learning-portal",
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop", // Code/learning image
       gradient: "from-green-500 to-emerald-500"
@@ -31,7 +31,7 @@ export const ProjectsSection = () => {
     {
       title: "Daily Email Summarizer",
       description: "Intelligent email processing system that automatically summarizes daily emails using natural language processing and machine learning techniques.",
-      skills: ["Machine Learning", "NLP", "Python", "Email Processing", "API Integration"],
+      skills: ["Machine Learning", "Python", "Email Processing"],
       github: "https://github.com/Hemanth-Kumar-Somana/Daily-Email-Summarizer",
       image: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=500&h=300&fit=crop", // Email/communication image
       gradient: "from-purple-500 to-violet-500"
