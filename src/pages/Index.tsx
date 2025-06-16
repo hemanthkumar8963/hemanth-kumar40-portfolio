@@ -1,31 +1,22 @@
 
-import { useState } from 'react';
-import { Sidebar } from '@/components/Sidebar';
-import { MainContent } from '@/components/MainContent';
 import { Header } from '@/components/Header';
+import { HomeSection } from '@/components/portfolio/HomeSection';
+import { AboutSection } from '@/components/portfolio/AboutSection';
+import { SkillsSection } from '@/components/portfolio/SkillsSection';
+import { ProjectsSection } from '@/components/portfolio/ProjectsSection';
+import { ExperienceSection } from '@/components/portfolio/ExperienceSection';
+import { ContactSection } from '@/components/portfolio/ContactSection';
 
 const Index = () => {
-  const [selectedTopic, setSelectedTopic] = useState<string>('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
-  const [activeTab, setActiveTab] = useState<'videos' | 'mcqs' | 'coding'>('videos');
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen">
       <Header />
-      <div className="flex">
-        <Sidebar 
-          selectedTopic={selectedTopic}
-          setSelectedTopic={setSelectedTopic}
-          selectedDifficulty={selectedDifficulty}
-          setSelectedDifficulty={setSelectedDifficulty}
-        />
-        <MainContent 
-          selectedTopic={selectedTopic}
-          selectedDifficulty={selectedDifficulty}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-      </div>
+      <HomeSection />
+      <AboutSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ExperienceSection />
+      <ContactSection />
     </div>
   );
 };

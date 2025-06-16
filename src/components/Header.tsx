@@ -1,8 +1,9 @@
 
-import { Code2, User, LogOut } from 'lucide-react';
+import { Code2, User, LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,14 +14,32 @@ import {
 export const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/');
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const navItems = [
+    { label: 'Home', id: 'home' },
+    { label: 'About', id: 'about' },
+    { label: 'Skills', id: 'skills' },
+    { label: 'Projects', id: 'projects' },
+    { label: 'Experience', id: 'experience' },
+    { label: 'Contact', id: 'contact' },
+  ];
+
   return (
-    <header className="bg-white/90 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
+    <header className="bg-white/95 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -29,13 +48,44 @@ export const Header = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                DSA Master Hub
+                Hemanth Kumar
               </h1>
-              <p className="text-sm text-slate-600">Learn Data Structures & Algorithms</p>
+              <p className="text-sm text-slate-600">Full Stack Developer</p>
             </div>
           </div>
           
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          
           <div className="flex items-center space-x-4">
+            {/* Mobile Menu */}
+            <div className="md:hidden">
+              <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    <Menu className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {navItems.map((item) => (
+                    <DropdownMenuItem key={item.id} onClick={() => scrollToSection(item.id)}>
+                      {item.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -57,6 +107,7 @@ export const Header = () => {
                   variant="outline" 
                   size="sm"
                   onClick={() => navigate('/auth')}
+                  className="hidden sm:flex"
                 >
                   <User className="h-4 w-4 mr-2" />
                   Login
