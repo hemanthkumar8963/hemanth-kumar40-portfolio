@@ -1,25 +1,33 @@
 
-import { Code, Shield, Brain, Globe, Database, Server } from 'lucide-react';
+import { Code, Shield, Brain, Globe, Database, Server, Wrench, Layers } from 'lucide-react';
 
 export const SkillsSection = () => {
   const skillCategories = [
     {
-      title: "Frontend Development",
-      icon: <Globe className="h-8 w-8" />,
-      skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Interactive Web Design"],
+      title: "Programming Languages",
+      icon: <Code className="h-8 w-8" />,
+      skills: ["Python", "C", "Java", "JavaScript", "TypeScript"],
       color: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Backend Development", 
-      icon: <Server className="h-8 w-8" />,
-      skills: ["Node.js", "Express.js", "Python", "RESTful APIs", "Authentication"],
-      color: "from-green-500 to-emerald-500"
+      title: "Web Development", 
+      icon: <Globe className="h-8 w-8" />,
+      skills: ["HTML", "CSS", "Bootstrap", "React", "Node.js", "Express.js", "Interactive Web Design"],
+      color: "from-green-500 to-emerald-500",
+      level: "Medium"
     },
     {
-      title: "Database & Tools",
+      title: "Database",
       icon: <Database className="h-8 w-8" />,
-      skills: ["MongoDB", "MySQL", "SQL", "Git", "GitHub", "VS Code"],
-      color: "from-purple-500 to-violet-500"
+      skills: ["MySQL", "MongoDB", "SQL"],
+      color: "from-purple-500 to-violet-500",
+      level: "Beginner"
+    },
+    {
+      title: "Core Skills",
+      icon: <Layers className="h-8 w-8" />,
+      skills: ["Data Structures & Algorithms", "Object-Oriented Programming", "UI/UX Design", "Problem Solving"],
+      color: "from-indigo-500 to-purple-500"
     },
     {
       title: "Machine Learning",
@@ -34,10 +42,10 @@ export const SkillsSection = () => {
       color: "from-red-500 to-pink-500"
     },
     {
-      title: "Data Structures & Algorithms",
-      icon: <Code className="h-8 w-8" />,
-      skills: ["Problem Solving", "Algorithm Design", "Time Complexity", "Space Complexity", "Coding Challenges"],
-      color: "from-indigo-500 to-purple-500"
+      title: "Tools & Technologies",
+      icon: <Wrench className="h-8 w-8" />,
+      skills: ["Git", "GitHub", "VS Code", "MERN Stack", "RESTful APIs"],
+      color: "from-teal-500 to-cyan-500"
     }
   ];
 
@@ -56,7 +64,14 @@ export const SkillsSection = () => {
                   {category.icon}
                 </div>
                 
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">{category.title}</h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800">{category.title}</h3>
+                  {category.level && (
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                      {category.level}
+                    </span>
+                  )}
+                </div>
                 
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
