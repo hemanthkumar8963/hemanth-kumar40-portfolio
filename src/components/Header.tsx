@@ -31,49 +31,47 @@ export const Header = () => {
   ];
 
   return (
-    <div className="p-4">
-      <header className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50 rounded-lg">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Code2 className="h-5 w-5 text-white" />
-              </div>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-3 py-1 rounded-lg hover:bg-slate-800 text-sm"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-            
-            {/* Mobile Menu */}
-            <div className="md:hidden">
-              <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700">
-                    <Menu className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-slate-800 border-slate-700">
-                  {navItems.map((item) => (
-                    <DropdownMenuItem key={item.id} onClick={() => scrollToSection(item.id)} className="text-slate-300 hover:text-white hover:bg-slate-700">
-                      {item.label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+    <header className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 fixed top-0 left-0 right-0 z-50 mx-4 mt-4 rounded-lg">
+      <div className="container mx-auto px-4 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <Code2 className="h-5 w-5 text-white" />
             </div>
           </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-3 py-1 rounded-lg hover:bg-slate-800 text-sm"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          
+          {/* Mobile Menu */}
+          <div className="md:hidden">
+            <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700">
+                  <Menu className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-slate-800 border-slate-700">
+                {navItems.map((item) => (
+                  <DropdownMenuItem key={item.id} onClick={() => scrollToSection(item.id)} className="text-slate-300 hover:text-white hover:bg-slate-700">
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };
