@@ -1,12 +1,14 @@
 
-import { Calendar, Award, ExternalLink, Eye } from 'lucide-react';
+import { Calendar, Award, ExternalLink, Eye, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const ExperienceSection = () => {
-  const handleViewCredential = (certName: string) => {
-    // This will be implemented once you upload the PDFs
-    console.log(`View credential for: ${certName}`);
-    alert(`View credential functionality will be implemented once PDFs are uploaded for: ${certName}`);
+  const handleViewCredential = (certName: string, certificateUrl?: string) => {
+    if (certificateUrl) {
+      window.open(certificateUrl, '_blank');
+    } else {
+      alert(`Certificate for ${certName} will be available soon!`);
+    }
   };
 
   const certifications = [
@@ -14,10 +16,22 @@ export const ExperienceSection = () => {
       organization: "CS50 x Harvard",
       period: "Dec 2024 – May 2025",
       courses: [
-        "CS50's Introduction to Computer Science",
-        "Python Programming", 
-        "Databases with SQL",
-        "Web Programming with Python and JavaScript"
+        {
+          name: "CS50's Introduction to Computer Science",
+          certificateUrl: "/lovable-uploads/5ae16e33-916f-4205-a011-934339b108ed.png"
+        },
+        {
+          name: "Python Programming", 
+          certificateUrl: "/lovable-uploads/fa22ca46-7178-4b08-8b51-debe2570169e.png"
+        },
+        {
+          name: "Databases with SQL",
+          certificateUrl: "/lovable-uploads/3b326cbe-d740-4ac2-b837-ad3adb224075.png"
+        },
+        {
+          name: "Web Programming with Python and JavaScript",
+          certificateUrl: null // Certificate not generated yet
+        }
       ],
       type: "Educational Program",
       color: "from-red-600 to-red-700",
@@ -28,10 +42,10 @@ export const ExperienceSection = () => {
       program: "Young Professional Batch-2",
       period: "Feb 2025 – Apr 2025",
       courses: [
-        "Communication Skills",
-        "Financial Literacy",
-        "Business Etiquette", 
-        "Digital Literacy Skills"
+        { name: "Communication Skills", certificateUrl: "/lovable-uploads/78dd9d9e-835f-4dd2-af7b-4d8f37578e43.png" },
+        { name: "Financial Literacy", certificateUrl: null },
+        { name: "Business Etiquette", certificateUrl: null }, 
+        { name: "Digital Literacy Skills", certificateUrl: null }
       ],
       type: "Professional Development",
       color: "from-blue-600 to-blue-700"
@@ -41,8 +55,14 @@ export const ExperienceSection = () => {
       program: "Micro-Certifications",
       period: "Feb 2025 – Apr 2025",
       courses: [
-        "Flow Designer – Feb 2025",
-        "UI Builder – Apr 2025"
+        {
+          name: "Flow Designer – Feb 2025",
+          certificateUrl: "/lovable-uploads/fc257750-c769-47cb-8525-d469c2efd264.png"
+        },
+        {
+          name: "UI Builder – Apr 2025",
+          certificateUrl: "/lovable-uploads/09c670e4-30a8-4121-8b5f-577e4b87c269.png"
+        }
       ],
       type: "Technical Certification",
       color: "from-green-600 to-green-700",
@@ -92,24 +112,24 @@ export const ExperienceSection = () => {
                     </div>
                   </div>
                   
-                  <div className="grid md:grid-cols-2 gap-3 mb-4">
+                  <div className="space-y-3 mb-4">
                     {cert.courses.map((course, courseIndex) => (
-                      <div key={courseIndex} className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-gray-700 font-medium">{course}</span>
+                      <div key={courseIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <span className="text-gray-700 font-medium">{course.name}</span>
+                        </div>
+                        <Button 
+                          onClick={() => handleViewCredential(course.name, course.certificateUrl)}
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                        >
+                          <Eye className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+                          <span>View</span>
+                        </Button>
                       </div>
                     ))}
-                  </div>
-                  
-                  <div className="flex justify-end">
-                    <Button 
-                      onClick={() => handleViewCredential(cert.organization)}
-                      variant="outline"
-                      className="flex items-center space-x-2"
-                    >
-                      <Eye className="h-4 w-4" />
-                      <span>View Credential</span>
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -117,7 +137,7 @@ export const ExperienceSection = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border-2 border-blue-100 hover:border-blue-200 transition-all duration-300">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">Continuous Learning Journey</h3>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 I believe in continuous learning and staying updated with the latest technologies and industry trends. 
