@@ -35,6 +35,7 @@ export const ExperienceSection = () => {
       ],
       type: "Educational Program",
       color: "from-red-600 to-red-700",
+      hoverBorder: "hover:border-red-400",
       profileImage: "https://camo.githubusercontent.com/2485cdb92cc1563cb21703bd1dc5474a727cd17b4d8243b27b9906468ec4e945/68747470733a2f2f676f6f2e676c2f6d4a774e5543"
     },
     {
@@ -44,6 +45,7 @@ export const ExperienceSection = () => {
       courses: [],
       type: "Professional Development",
       color: "from-blue-600 to-blue-700",
+      hoverBorder: "hover:border-blue-400",
       singleCertificate: true,
       certificateUrl: "/lovable-uploads/78dd9d9e-835f-4dd2-af7b-4d8f37578e43.png"
     },
@@ -63,6 +65,7 @@ export const ExperienceSection = () => {
       ],
       type: "Technical Certification",
       color: "from-green-600 to-green-700",
+      hoverBorder: "hover:border-green-400",
       profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi9azji1P3eHGE-4K5f_uogVJk8glXpar_cg&s"
     }
   ];
@@ -77,32 +80,32 @@ export const ExperienceSection = () => {
           
           <div className="space-y-8">
             {certifications.map((cert, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
+              <div key={index} className={`bg-white rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden border-2 border-gray-100 ${cert.hoverBorder} hover:shadow-blue-200/50 hover:bg-gradient-to-br hover:from-white hover:to-blue-50/30 group`}>
                 <div className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                           {cert.profileImage ? (
                             <img 
                               src={cert.profileImage} 
                               alt={`${cert.organization} logo`}
-                              className="w-full h-full object-contain p-1 filter grayscale"
+                              className="w-full h-full object-contain p-1 filter grayscale group-hover:grayscale-0 transition-all duration-300"
                             />
                           ) : (
-                            <Award className="h-6 w-6 text-gray-600" />
+                            <Award className="h-6 w-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
                           )}
                         </div>
                         <div>
-                          <h3 className="text-xl font-semibold text-gray-800">{cert.organization}</h3>
-                          {cert.program && <p className="text-gray-600 font-medium">{cert.program}</p>}
+                          <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-800 transition-colors duration-300">{cert.organization}</h3>
+                          {cert.program && <p className="text-gray-600 font-medium group-hover:text-blue-700 transition-colors duration-300">{cert.program}</p>}
                         </div>
                       </div>
                       
                       <div className="flex items-center space-x-2 mb-3">
-                        <Calendar className="h-4 w-4 text-gray-500" />
-                        <span className="text-gray-600">{cert.period}</span>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${cert.color} text-white`}>
+                        <Calendar className="h-4 w-4 text-gray-500 group-hover:text-blue-500 transition-colors duration-300" />
+                        <span className="text-gray-600 group-hover:text-blue-700 transition-colors duration-300">{cert.period}</span>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${cert.color} text-white group-hover:scale-105 group-hover:shadow-lg transition-all duration-300`}>
                           {cert.type}
                         </span>
                       </div>
@@ -110,12 +113,12 @@ export const ExperienceSection = () => {
                   </div>
                   
                   {cert.singleCertificate ? (
-                    <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 group-hover:bg-blue-50">
                       <Button 
                         onClick={() => handleViewCredential(cert.program || cert.organization, cert.certificateUrl)}
                         variant="outline"
                         size="lg"
-                        className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+                        className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group border-2 hover:border-blue-500"
                       >
                         <Eye className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                         <span>View Credential</span>
@@ -124,16 +127,16 @@ export const ExperienceSection = () => {
                   ) : (
                     <div className="space-y-3 mb-4">
                       {cert.courses.map((course, courseIndex) => (
-                        <div key={courseIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <div key={courseIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 group-hover:bg-blue-50">
                           <div className="flex items-center space-x-3">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                            <span className="text-gray-700 font-medium">{course.name}</span>
+                            <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-125 group-hover:bg-blue-600 transition-all duration-300"></div>
+                            <span className="text-gray-700 font-medium group-hover:text-blue-700 transition-colors duration-300">{course.name}</span>
                           </div>
                           <Button 
                             onClick={() => handleViewCredential(course.name, course.certificateUrl)}
                             variant="outline"
                             size="sm"
-                            className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+                            className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group border-2 hover:border-blue-500"
                           >
                             <Eye className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
                             <span>View</span>
