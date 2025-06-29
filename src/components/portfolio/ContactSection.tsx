@@ -9,35 +9,40 @@ export const ContactSection = () => {
       value: "hemanthkumarsomana@gmail.com",
       href: "mailto:hemanthkumarsomana@gmail.com",
       icon: <Mail className="h-5 w-5" />,
-      color: "from-red-500 to-pink-500"
+      color: "from-red-500 to-pink-500",
+      hoverBorder: "hover:border-red-400"
     },
     {
       label: "WhatsApp",
       value: "Chat on WhatsApp",
       href: "https://wa.me/919398756712",
       icon: <MessageSquare className="h-5 w-5" />,
-      color: "from-green-500 to-green-600"
+      color: "from-green-500 to-green-600",
+      hoverBorder: "hover:border-green-400"
     },
     {
       label: "LinkedIn",
       value: "Connect with me",
       href: "https://www.linkedin.com/in/hemanth-kumar-somana-2029b5212/",
       icon: <ExternalLink className="h-5 w-5" />,
-      color: "from-blue-500 to-cyan-500"
+      color: "from-blue-500 to-cyan-500",
+      hoverBorder: "hover:border-blue-400"
     },
     {
       label: "GitHub",
       value: "View my repositories",
       href: "https://github.com/Hemanth-Kumar-Somana",
       icon: <Github className="h-5 w-5" />,
-      color: "from-gray-700 to-gray-900"
+      color: "from-gray-700 to-gray-900",
+      hoverBorder: "hover:border-gray-600"
     },
     {
       label: "Resume",
       value: "Download Resume",
       href: "https://drive.google.com/drive/folders/1UNQzAjpEFmiSDNKKjK1dDo6AJVDOk7ce?usp=drive_link",
       icon: <ExternalLink className="h-5 w-5" />,
-      color: "from-green-500 to-emerald-500"
+      color: "from-green-500 to-emerald-500",
+      hoverBorder: "hover:border-emerald-400"
     }
   ];
 
@@ -65,28 +70,28 @@ export const ContactSection = () => {
                 href={contact.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 transform hover:-translate-y-2"
+                className={`group bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-100 ${contact.hoverBorder} hover:scale-[1.05] hover:bg-gradient-to-br hover:from-white hover:to-blue-50/30`}
               >
                 <div className="flex flex-col items-center text-center space-y-3">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${contact.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${contact.color} flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 group-hover:shadow-lg`}>
                     {contact.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
+                    <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-800 transition-colors duration-300">
                       {contact.label}
                     </h3>
-                    <p className="text-gray-600 group-hover:text-gray-700 transition-colors">
+                    <p className="text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
                       {contact.value}
                     </p>
                   </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors duration-300 group-hover:scale-110" />
                 </div>
               </a>
             ))}
           </div>
           
           <div className="text-center">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border-2 border-blue-100 hover:border-blue-200 transition-all duration-300">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border-2 border-blue-100 hover:border-blue-300 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-100/50 hover:to-purple-100/50">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">Ready to collaborate?</h3>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
                 Whether you have a project in mind, want to discuss opportunities, or just want to connect, 
