@@ -59,8 +59,8 @@ export const SkillsSection = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4`}>
+              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300 hover:border-blue-200 border border-gray-100">
+                <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center text-white mb-4 transition-transform duration-300 hover:rotate-6`}>
                   {category.icon}
                 </div>
                 
@@ -77,7 +77,7 @@ export const SkillsSection = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <span 
                       key={skillIndex}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
+                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 hover:scale-105 transition-all duration-200 cursor-default"
                     >
                       {skill}
                     </span>

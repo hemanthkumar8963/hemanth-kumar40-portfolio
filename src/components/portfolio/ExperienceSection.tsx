@@ -41,14 +41,11 @@ export const ExperienceSection = () => {
       organization: "TCS",
       program: "Young Professional Batch-2",
       period: "Feb 2025 – Apr 2025",
-      courses: [
-        { name: "Communication Skills", certificateUrl: "/lovable-uploads/78dd9d9e-835f-4dd2-af7b-4d8f37578e43.png" },
-        { name: "Financial Literacy", certificateUrl: null },
-        { name: "Business Etiquette", certificateUrl: null }, 
-        { name: "Digital Literacy Skills", certificateUrl: null }
-      ],
+      courses: [],
       type: "Professional Development",
-      color: "from-blue-600 to-blue-700"
+      color: "from-blue-600 to-blue-700",
+      singleCertificate: true,
+      certificateUrl: "/lovable-uploads/78dd9d9e-835f-4dd2-af7b-4d8f37578e43.png"
     },
     {
       organization: "ServiceNow",
@@ -80,7 +77,7 @@ export const ExperienceSection = () => {
           
           <div className="space-y-8">
             {certifications.map((cert, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+              <div key={index} className="bg-white rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
                 <div className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                     <div className="flex-1">
@@ -112,25 +109,39 @@ export const ExperienceSection = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-3 mb-4">
-                    {cert.courses.map((course, courseIndex) => (
-                      <div key={courseIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                          <span className="text-gray-700 font-medium">{course.name}</span>
+                  {cert.singleCertificate ? (
+                    <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                      <Button 
+                        onClick={() => handleViewCredential(cert.program || cert.organization, cert.certificateUrl)}
+                        variant="outline"
+                        size="lg"
+                        className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+                      >
+                        <Eye className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                        <span>View Credential</span>
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3 mb-4">
+                      {cert.courses.map((course, courseIndex) => (
+                        <div key={courseIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span className="text-gray-700 font-medium">{course.name}</span>
+                          </div>
+                          <Button 
+                            onClick={() => handleViewCredential(course.name, course.certificateUrl)}
+                            variant="outline"
+                            size="sm"
+                            className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+                          >
+                            <Eye className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+                            <span>View</span>
+                          </Button>
                         </div>
-                        <Button 
-                          onClick={() => handleViewCredential(course.name, course.certificateUrl)}
-                          variant="outline"
-                          size="sm"
-                          className="flex items-center space-x-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                        >
-                          <Eye className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
-                          <span>View</span>
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

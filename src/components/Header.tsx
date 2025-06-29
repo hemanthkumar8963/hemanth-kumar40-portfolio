@@ -47,7 +47,7 @@ export const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-slate-800 text-sm"
+                  className="text-slate-300 hover:text-white transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-slate-800 text-base"
                 >
                   {item.label}
                 </button>
@@ -65,7 +65,7 @@ export const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-slate-800 border-slate-700 w-48">
                 {navItems.map((item) => (
-                  <DropdownMenuItem key={item.id} onClick={() => scrollToSection(item.id)} className="text-slate-300 hover:text-white hover:bg-slate-700 cursor-pointer">
+                  <DropdownMenuItem key={item.id} onClick={() => scrollToSection(item.id)} className="text-slate-300 hover:text-white hover:bg-slate-700 cursor-pointer text-base">
                     {item.label}
                   </DropdownMenuItem>
                 ))}
